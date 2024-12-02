@@ -18,7 +18,7 @@ Vaihda kansio sov-ohj:
 
 Asenna folderiin nk_env komennolla
 
-```python3 -m -venv nk_env```
+```python3 -m venv nk_env```
 
 Aktivoi komentorivillä
 
