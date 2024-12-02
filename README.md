@@ -30,3 +30,9 @@ Django ver. 4.2.16 komennolla
 
 Projektin pitäisi toimia.
 
+## Superuser
+
+superuser: admin
+
+pw: admin
+
