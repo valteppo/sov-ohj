@@ -52,9 +52,9 @@ def edit_comment(request, comment_id):
     item = comment.item
 
     if request.method != 'POST':
-        form = CommentForm()
+        form = CommentForm(instance=comment)
     else:
-        form = CommentForm(data=request.POST)
+        form = CommentForm(instance=comment, data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('nettikirppis:item', item_id = item.id)
