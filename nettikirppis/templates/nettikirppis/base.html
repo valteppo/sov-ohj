@@ -1,8 +1,24 @@
 <p>
     <a href="{% url 'nettikirppis:index' %}">Nettikirppis</a>
     <a href="{% url 'nettikirppis:items' %}">Tavarat</a>
+
+    {% if user.is_authenticated %}
     <a href="{% url 'nettikirppis:new_item' %}">Uusi myynti-ilmoitus</a>
+    {% else %}
+    <a href="{% url 'accounts:login' %}">Kirjaudu sisään</a>
+    <a href="{% url 'accounts:register' %}">Rekisteröidy</a>
+    {% endif %}
 </p>
 
 {% block content %}
 {% endblock content %}
+
+{% if user.is_authenticated %}
+    <hr />
+    <form action="{% url 'accounts:logout' %}" method="post">
+        {% csrf_token %}
+        <button name="submit">Kirjaudu ulos</button>
+    </form>
+    {% else %}
+    <hr />
+{% endif %}

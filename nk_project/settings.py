@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Site apps
     'nettikirppis',
+    'accounts',
 
     # Django default apps
     'django.contrib.admin',
@@ -125,3 +126,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Project settings
+LOGIN_REDIRECT_URL = 'nettikirppis:index'
+LOGOUT_REDIRECT_URL = 'nettikirppis:index'
