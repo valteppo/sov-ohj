@@ -1,0 +1,15 @@
+{% extends 'nettikirppis/base.html' %}
+
+{% block content %}
+<p>Myynti-ilmoitukset</p>
+<ul>
+    {% for item in items %}
+    <li>
+        <a href="{% url 'nettikirppis:item' item.id %}">{{item}}</a>
+    </li>
+
+    {% empty %}
+    <li>Ei myytäviä tavaroita.</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

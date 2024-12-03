@@ -1,0 +1,27 @@
+{% extends 'nettikirppis/base.html' %}
+
+{% block content %}
+
+<p>Ilmoitus: {{item.name}}</p>
+<p>{{ item.description }}</p>
+<ul>
+    {% for comment in comments %}
+    <li>
+        <p>{{ comment.date_added }}</p>
+        <p>{{ comment.text }}</p>
+        <p>
+            <a href="{% url 'nettikirppis:edit_comment' comment.id %}">
+                Muokkaa kommenttia
+            </a>
+        </p>
+    </li>
+
+    {% empty %}
+    <p></p>
+    {% endfor %}
+</ul>
+<p>
+    <a href="{% url 'nettikirppis:new_comment' item.id %}">Jätä viesti</a>
+</p>
+
+{% endblock content %}

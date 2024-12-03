@@ -1,0 +1,12 @@
+{% extends 'nettikirppis/base.html' %}
+
+{% block content %}
+<p>Tee uusi myynti-ilmoitus:</p>
+<form action="{% url 'nettikirppis:new_item' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button name="submit">Valmis</button>
+
+</form>
+
+{% endblock content %}

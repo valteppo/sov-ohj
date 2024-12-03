@@ -13,11 +13,11 @@ class Item(models.Model):
     visible = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.name} : {self.price}"
+        return f"{self.name} : {self.price}€"
     
 class Comment(models.Model):
     """
-    Ihmisten myytäviin tavaroihin liittyvät ostajien kommentit, kyselyt, pyynnöt, tarkennukset, tarjoukset, ym.
+    Ihmisten myytäviin tavaroihin liittyvät ostajien kommentit, ym.
     """
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     text = models.TextField()
