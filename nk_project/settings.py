@@ -130,3 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Project settings
 LOGIN_REDIRECT_URL = 'nettikirppis:index'
 LOGOUT_REDIRECT_URL = 'nettikirppis:index'
+LOGIN_URL='accounts:login'
