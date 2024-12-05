@@ -13,13 +13,11 @@ def check_owner(item, user, request):
 def index(request):
     return render(request, 'nettikirppis/index.html')
 
-#@login_required
 def items(request):
     items = Item.objects.order_by('date_added')
     context = {'items':items}
     return render(request, 'nettikirppis/items.html', context)
 
-#@login_required
 def item(request, item_id):
     item = Item.objects.get(id=item_id)
     comments = item.comment_set.order_by('date_added')
@@ -31,8 +29,11 @@ def new_item(request):
     if request.method != 'POST':
         form = ItemForm()
     else:
-        form = ItemForm(data=request.POST)
+        form = ItemForm(data=request.POST, files=request.FILES)
         if form.is_valid():
+            
+            new_item = form.save(commit=False)
+            new_item.owner = request.user
             form.save()
             return redirect('nettikirppis:items')
     

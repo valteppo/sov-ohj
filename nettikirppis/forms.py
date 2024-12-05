@@ -8,12 +8,14 @@ class ItemForm(forms.ModelForm):
         fields = [
             'name',
             'description',
-            'price'
+            'price',
+            'image',
         ]
         labels = {
             'name':'Nimi',
             'description':'Kuvaus',
-            'price':'hinta',
+            'price':'Hinta',
+            'image':'Kuva'
         }
         widgets = {
             'description':forms.Textarea(attrs={'cols':80})

@@ -28,6 +28,10 @@ Django ver. 4.2.16 komennolla
 
 ```pip install django==4.2.16```
 
+Pillow 11.0.0 komennolla (kuvia varten)
+
+```pip install pillow==11.0.0```
+
 Projektin pitäisi toimia.
 
 ## Superuser
