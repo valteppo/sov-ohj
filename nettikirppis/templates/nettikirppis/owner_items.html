@@ -1,7 +1,7 @@
 {% extends 'nettikirppis/base.html' %}
 
 {% block content %}
-<p>Myynti-ilmoitukset</p>
+<p>Omat ilmoituksesi</p>
 <ul>
     {% for item in items %}
     <li>
@@ -12,4 +12,5 @@
     <li>Ei myytäviä tavaroita.</li>
     {% endfor %}
 </ul>
+<a href="{% url 'nettikirppis:new_item' %}">Lisää uusi ilmoitus</a>
 {% endblock content %}

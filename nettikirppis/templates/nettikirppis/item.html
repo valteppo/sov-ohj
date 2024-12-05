@@ -3,11 +3,16 @@
 {% block content %}
 {% load static %}
 
+<p>Ilmoittajan nimi: {{item.owner}}</p>
 <p>Ilmoitus: {{item.name}}</p>
 <p>{{ item.description }}</p>
 <p>{{ item.price }}€</p>
 <div>
-    <img src="{{ item.image.url }}"></img>
+    {% if item.image %}
+        <img src="{{ item.image.url }}"></img>
+    {% else %}
+        <p>Ei kuvaa tälle tuotteelle</p>
+    {% endif %}
 </div>
 <ul>
     {% for comment in comments %}

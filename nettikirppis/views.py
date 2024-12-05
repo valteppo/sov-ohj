@@ -78,4 +78,4 @@ def edit_comment(request, comment_id):
 def owner_items(request):
     items = Item.objects.filter(owner=request.user).order_by('date_added')
     context = {'items':items}
-    return render(request, 'nettikirppis/items.html', context)
+    return render(request, 'nettikirppis/owner_items.html', context)
