@@ -25,6 +25,7 @@ class Comment(models.Model):
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     visible = models.BooleanField(default=True)
+    owner=models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text

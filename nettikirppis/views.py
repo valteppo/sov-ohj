@@ -13,13 +13,11 @@ def check_owner(item, user, request):
 def index(request):
     return render(request, 'nettikirppis/index.html')
 
-#@login_required
 def items(request):
     items = Item.objects.order_by('date_added')
     context = {'items':items}
     return render(request, 'nettikirppis/items.html', context)
 
-#@login_required
 def item(request, item_id):
     item = Item.objects.get(id=item_id)
     comments = item.comment_set.order_by('date_added')
@@ -33,7 +31,9 @@ def new_item(request):
     else:
         form = ItemForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_item=form.save(commit=False)
+            new_item.owner=request.user
+            new_item.save()
             return redirect('nettikirppis:items')
     
     context = {'form':form}
@@ -50,6 +50,7 @@ def new_comment(request, item_id):
         if form.is_valid():
             new_comment = form.save(commit=False)
             new_comment.item = item
+            new_comment.owner=request.user
             new_comment.save()
             return redirect('nettikirppis:item', item_id=item_id)
     
@@ -60,6 +61,7 @@ def new_comment(request, item_id):
 def edit_comment(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
     item = comment.item
+    check_owner(item, request.user, request)
 
     if request.method != 'POST':
         form = CommentForm(instance=comment)

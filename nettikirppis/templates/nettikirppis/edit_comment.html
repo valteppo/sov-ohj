@@ -4,13 +4,14 @@
 <p>
     <a href="{% url 'nettikirppis:item' item.id %}">{{ item.name }}</a>
 </p>
-<p>Muokkaa kommenttia:</p>
 
-<form action="{% url 'nettikirppis:edit_comment' comment.id %}" method="post">
-    {% csrf_token %}
-    {{ form.as_div }}
-    <button name="submit">
-        Valmis
-    </button>
-</form>
+    <p>Muokkaa kommenttia</p>
+        
+    <form action="{% url 'nettikirppis:edit_comment' comment.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button name="submit">
+            Valmis
+        </button>
+    </form>
 {% endblock content %}

@@ -3,6 +3,7 @@
     <a href="{% url 'nettikirppis:items' %}">Tavarat</a>
 
     {% if user.is_authenticated %}
+        Hei, {{user.username}}.
     <a href="{% url 'nettikirppis:new_item' %}">Uusi myynti-ilmoitus</a>
     {% else %}
     <a href="{% url 'accounts:login' %}">Kirjaudu sisään</a>
