@@ -13,13 +13,13 @@ def check_owner(item, user, request):
 def index(request):
     return render(request, 'nettikirppis/index.html')
 
-@login_required
+#@login_required
 def items(request):
     items = Item.objects.order_by('date_added')
     context = {'items':items}
     return render(request, 'nettikirppis/items.html', context)
 
-@login_required
+#@login_required
 def item(request, item_id):
     item = Item.objects.get(id=item_id)
     comments = item.comment_set.order_by('date_added')
