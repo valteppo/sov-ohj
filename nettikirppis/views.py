@@ -74,3 +74,8 @@ def edit_comment(request, comment_id):
     context = {'comment':comment, 'item':item, 'form':form}
     return render(request, 'nettikirppis/edit_comment.html', context)
 
+@login_required
+def owner_items(request):
+    items = Item.objects.filter(owner=request.user).order_by('date_added')
+    context = {'items':items}
+    return render(request, 'nettikirppis/items.html', context)

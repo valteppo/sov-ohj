@@ -5,6 +5,7 @@
     {% if user.is_authenticated %}
         Hei, {{user.username}}.
     <a href="{% url 'nettikirppis:new_item' %}">Uusi myynti-ilmoitus</a>
+    <a href="{% url 'nettikirppis:owner_items' %}">Omat tavarat</a>
     {% else %}
     <a href="{% url 'accounts:login' %}">Kirjaudu sisään</a>
     <a href="{% url 'accounts:register' %}">Rekisteröidy</a>

@@ -14,6 +14,7 @@ urlpatterns = [
     path('new_item/', views.new_item, name='new_item'),
     path('new_comment/<int:item_id>/', views.new_comment, name='new_comment'),
     path('edit_comment/<int:comment_id>/', views.edit_comment, name='edit_comment'),
+    path('owner_items/', views.owner_items, name='owner_items'),
 
 ] + static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
