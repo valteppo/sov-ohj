@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from .models import Item, Comment
 from .forms import ItemForm, CommentForm
+
 
 # Create your views here.
 def check_owner(item, user, request):
@@ -79,3 +80,40 @@ def owner_items(request):
     items = Item.objects.filter(owner=request.user).order_by('date_added')
     context = {'items':items}
     return render(request, 'nettikirppis/owner_items.html', context)
+
+@login_required
+def edit_item(request, item_id):
+    item = Item.objects.get(id=item_id)
+
+    if request.method != 'POST':
+        form = ItemForm(instance=item)
+    else:
+        form = ItemForm(instance=item, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('nettikirppis:items')
+    
+    context = {'item':item, 'form':form}
+    return render(request, 'nettikirppis/edit_item.html', context)
+
+@login_required
+def delete_item(request, item_id):
+    item=Item.objects.get(id=item_id)
+
+    if request.method == "POST":
+        item.delete()
+        return redirect('nettikirppis:owner_items')
+    
+    context = {'item': item}
+    return render(request, 'nettikirppis/delete_item.html', context)
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    item = comment.item
+
+    if request.method == "POST":
+        comment.delete()
+        return JsonResponse({'success': True})
+    
+    return JsonResponse({'success': True, 'error':'Invalid request method'})

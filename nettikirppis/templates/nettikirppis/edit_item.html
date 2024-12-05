@@ -1,0 +1,18 @@
+{% extends 'nettikirppis/base.html' %}
+
+{% block content %}
+<p>
+    <a href="{% url 'nettikirppis:item' item.id %}">{{ item.name }}</a>
+</p>
+
+    <p>Muokkaa ilmoitusta</p>
+        
+    <form action="{% url 'nettikirppis:edit_item' item.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button name="submit">
+            Valmis
+        </button>
+    </form>
+<a href="{% url 'nettikirppis:delete_item' item.id %}">Poista ilmoitus</a>
+{% endblock content %}

@@ -6,6 +6,7 @@
     {% for item in items %}
     <li>
         <a href="{% url 'nettikirppis:item' item.id %}">{{item}}</a>
+        <p><a href="{% url 'nettikirppis:edit_item' item.id %}">Muokkaa ilmoitusta</a></p>
     </li>
 
     {% empty %}

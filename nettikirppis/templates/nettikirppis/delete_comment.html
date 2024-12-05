@@ -1,0 +1,29 @@
+<script>
+    function confirmDelete(commentId) {
+        const userConfirmed=confirm("Haluatko varmasti poistaa tämän kommentin?");
+        if (userConfirmed) {
+            fetch(`/delete_comment/${commentId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success){
+                    const commentElement=document.getElementById(`comment-${commentId}`);
+                    if (commentElement) {
+                        commentElement.remove();
+                    }
+                    alert("Kommentti poistettu!");
+                } else {
+                    alert("Kommenttia ei poistettu");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Virhe tapahtui kommenttia poistaessa");
+            });
+        }
+    }
+</script>
