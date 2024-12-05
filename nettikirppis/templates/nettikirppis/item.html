@@ -1,10 +1,14 @@
 {% extends 'nettikirppis/base.html' %}
 
 {% block content %}
+{% load static %}
 
 <p>Ilmoitus: {{item.name}}</p>
 <p>{{ item.description }}</p>
 <p>{{ item.price }}€</p>
+<div>
+    <img src="{{ item.image.url }}"></img>
+</div>
 <ul>
     {% for comment in comments %}
     <li>

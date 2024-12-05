@@ -29,7 +29,7 @@ def new_item(request):
     if request.method != 'POST':
         form = ItemForm()
     else:
-        form = ItemForm(data=request.POST)
+        form = ItemForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             new_item=form.save(commit=False)
             new_item.owner=request.user
