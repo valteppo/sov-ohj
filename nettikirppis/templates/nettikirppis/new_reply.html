@@ -5,8 +5,8 @@
     <a href="{% url 'nettikirppis:item' item.id %}">{{ item }}</a>
 </p>
 
-<p>Kirjoita myyjälle:</p>
-<form action="{% url 'nettikirppis:new_comment' comment.id %}" method="post">
+<p>Vastaa:</p>
+<form action="{% url 'nettikirppis:new_reply' comment.id %}" method="post">
     {% csrf_token %}
     {{ form.as_div }}
     <button name="submit">

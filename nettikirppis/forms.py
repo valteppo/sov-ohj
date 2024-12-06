@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Item, Comment
+from .models import Item, Comment, Reply
 
 class ItemForm(forms.ModelForm):
     class Meta:
@@ -24,6 +24,19 @@ class ItemForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
+        fields = [
+            'text',
+        ]
+        labels = {
+            'text':'Kommentti',
+        }
+        widgets = {
+            'text':forms.Textarea(attrs={'cols':80})
+        }
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Reply
         fields = [
             'text',
         ]

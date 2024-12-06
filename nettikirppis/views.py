@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, JsonResponse
-from .models import Item, Comment
-from .forms import ItemForm, CommentForm
+
+from .models import Item, Comment, Reply
+from .forms import ItemForm, CommentForm, ReplyForm
 
 
 # Create your views here.
@@ -22,7 +23,8 @@ def items(request):
 def item(request, item_id):
     item = Item.objects.get(id=item_id)
     comments = item.comment_set.order_by('date_added')
-    context = {'item':item, 'comments':comments}
+    replies = Reply.objects.filter(original_comment__in=[c.id for c in comments])
+    context = {'item':item, 'comments':comments, 'replies':replies}
     return render(request, 'nettikirppis/item.html', context)
 
 @login_required
@@ -117,3 +119,24 @@ def delete_comment(request, comment_id):
         return JsonResponse({'success': True})
     
     return JsonResponse({'success': True, 'error':'Invalid request method'})
+
+@login_required
+def new_reply(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    item = comment.item
+
+    if request.method != 'POST':
+        form = ReplyForm()
+    else:
+        form = ReplyForm(data=request.POST)
+        if form.is_valid():
+            new_reply = form.save(commit=False)
+            new_reply.owner = request.user
+            new_reply.item = item
+            new_reply.original_comment = comment
+            form.save()
+            return redirect('nettikirppis:item', item_id = item.id)
+        
+    context = {'item':item,'comment':comment, 'form':form}
+    return render(request, 'nettikirppis/new_reply.html', context)
+    

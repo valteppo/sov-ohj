@@ -16,26 +16,51 @@
 </div>
 <ul>
     {% for comment in comments %}
-    <li>
+    <li >
         <p>{{ comment.owner }}:</p>
         <p>{{ comment.date_added }}</p>
         <p>{{ comment.text }}</p>
+
+        {% if user.id == comment.owner.id %}
         <p>
             <a href="{% url 'nettikirppis:edit_comment' comment.id %}">
                 Muokkaa kommenttia
             </a>
         </p>
+        {% else %}
+        <p>
+            <a href="{% url 'nettikirppis:new_reply' comment.id %}">
+                Vastaa
+            </a>
+        </p>
+        {% endif %}
+    
+        {% if user.id == comment.owner.id %}
+        <li id="comment-{{ comment.id }}">
+            <button onclick="confirmDelete( commentId )" class="delete-button">Poista</button>
+        </li>
+        {% endif %}
     </li>
-    <li id="comment-{{ comment.id }}">
-        <button onclick="confirmDelete( commentId )" class="delete-button">Poista</button>
-    </li>
+        <ul>
+        {% for reply in replies %}
+        {% if reply.orignal_comment == comment.id %}
+        <li>
+            <p>{{ reply.owner }}:</p>
+            <p>{{ reply.date_added }}</p>
+            <p>{{ reply.text }}</p>
+        </li>
+        {% endif %}
+        {% endfor %}
+        </ul>
 
     {% empty %}
-    <p></p>
     {% endfor %}
 </ul>
+
+{% if user.id != item.owner.id %}
 <p>
     <a href="{% url 'nettikirppis:new_comment' item.id %}">Jätä viesti</a>
 </p>
+{% endif %}
 
 {% endblock content %}
