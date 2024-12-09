@@ -26,38 +26,53 @@
                                 Ilmoitukset
                             </a>
                         </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                    </ul> <!-- End of links on the left side of the navbar-->
+
+                    <!-- Account-related links-->
+                     <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <span class="navbar-text me-2">Hei, {{ user.username }}.
+                                </span>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'accounts:register' %}">
+                                    Rekisteröidy
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'accounts:login' %}">
+                                    Kirjaudu sisään
+                                </a>
+                            </li>
+                        {% endif %}
+                     </ul> <!-- End of account-related links-->
+                     {% if user.is_authenticated %}
+                        <form action="{% url 'accounts:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button name="submit" class="btn btn-outline-secondary btn-sm">
+                                Kirjaudu ulos
+                            </button>
+                        </form>
+                     {% endif %}
+                </div> <!-- Closes the collapsible parts of navbar-->
+            </div> <!-- Closes navbar's containers-->
+        </nav> <!-- End of navbar -->
+    {% block content %} {% endblock content %}
     </body>
 </html>
 
 
 
 <p>
-    <a href="{% url 'nettikirppis:index' %}">Nettikirppis</a>
-    <a href="{% url 'nettikirppis:items' %}">Tavarat</a>
 
     {% if user.is_authenticated %}
         Hei, {{user.username}}.
     <a href="{% url 'nettikirppis:new_item' %}">Uusi myynti-ilmoitus</a>
     <a href="{% url 'nettikirppis:owner_items' %}">Omat tavarat</a>
-    {% else %}
-    <a href="{% url 'accounts:login' %}">Kirjaudu sisään</a>
-    <a href="{% url 'accounts:register' %}">Rekisteröidy</a>
     {% endif %}
 </p>
 
-{% block content %}
-{% endblock content %}
 
-{% if user.is_authenticated %}
-    <hr />
-    <form action="{% url 'accounts:logout' %}" method="post">
-        {% csrf_token %}
-        <button name="submit">Kirjaudu ulos</button>
-    </form>
-    {% else %}
-    <hr />
-{% endif %}
+
