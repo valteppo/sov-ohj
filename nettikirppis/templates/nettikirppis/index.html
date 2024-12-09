@@ -1,5 +1,17 @@
 {% extends 'nettikirppis/base.html' %}
 
+{% block page_header %}
+    <div class="p-3 mb-4 bg-light border rounded-3">
+        <div class="container-fluid py-4">
+            <h1 class="display-3">Osta ja myy käytettyjä tavaroita</h1>
+
+            <p class="lead">Tue ilmastoa! Myy ja osta käytettyjä tavaroita.</p>
+            <!-- Vaihdetaan tuohon ylempään joku raflaavampi teksti joka "myy" tuotetta-->
+
+            <a class="btn btn-primary btn-lg mt-1" href="{% url 'accounts:register' %}">Rekisteröidy &raquo;</a>
+        </div>
+    </div>
+{% endblock page_header %}
 {% block content %}
 <p>Index page</p>
 
