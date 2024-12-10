@@ -55,9 +55,20 @@
 </ul>
 
 {% if user.id != item.owner.id %}
-<p>
-    <a href="{% url 'nettikirppis:new_comment' item.id %}">Jätä viesti</a>
-</p>
+    <form action="{% url 'nettikirppis:new_comment' item.id %}" method="post">
+        {% csrf_token %}
+        <button name="submit" class="bottom-button">Jätä viesti</button>
+    </form>
+
+{% endif %}
+
+{% if user.is_authenticated %}
+    <form action="{% url 'nettikirppis:edit_item' item.id %}" method="post">
+        {% csrf_token %}
+        <button name="submit" class="bottom-button">
+            Muokkaa ilmoitustasi
+        </button>
+    </form>
 {% endif %}
 
 {% endblock content %}

@@ -10,9 +10,15 @@
     <form action="{% url 'nettikirppis:edit_item' item.id %}" method="post">
         {% csrf_token %}
         {{ form.as_div }}
-        <button name="submit">
+        <button name="submit" class="yes-button">
             Valmis
         </button>
     </form>
-<a href="{% url 'nettikirppis:delete_item' item.id %}">Poista ilmoitus</a>
+    <form action="{% url 'nettikirppis:delete_item' item.id %}" method="post">
+        {% csrf_token %}
+        <button name="submit" class="yes-button">
+            Poista ilmoitus
+        </button>
+    </form>
+
 {% endblock content %}

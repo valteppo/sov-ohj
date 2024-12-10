@@ -8,17 +8,21 @@
         <a href="{% url 'nettikirppis:item' item.id %}">{{item}}</a>
         <p><a href="{% url 'nettikirppis:edit_item' item.id %}">Muokkaa ilmoitusta</a></p>
     </li>
-
+ 
     {% empty %}
+
     <li>Ei myytäviä tavaroita.</li>
     {% endfor %}
+
 </ul>
+
 {% if user.is_authenticated %}
-<form action="{% url 'nettikirppis:new_item' %}" method="post">
-    {% csrf_token %}
-    <button class="bottom-button">
-        Lisää uusi ilmoitus
-    </button>
-</form>
+    <form action="{% url 'nettikirppis:new_item' %}" method="post">
+        {% csrf_token %}
+        <button class="bottom-button">
+            Lisää uusi ilmoitus
+        </button>
+    </form>
+    
 {% endif %}
 {% endblock content %}
