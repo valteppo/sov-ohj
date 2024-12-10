@@ -8,6 +8,18 @@
         {% load django_bootstrap5 %}
         {% bootstrap_css %}
         {% bootstrap_javascript %}
+
+        <style>
+            .bottom-button{
+                background-color:#0d6efd;
+                color: white;
+                border: none;
+                border-radius: 60px;
+                padding: 10px 10px 10px;
+                margin-left: 30px;
+                margin-bottom: 5px;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
@@ -72,14 +84,8 @@
 
 
 
-<p>
 
-    {% if user.is_authenticated %}
-        Hei, {{user.username}}.
-    <a href="{% url 'nettikirppis:new_item' %}">Uusi myynti-ilmoitus</a>
-    <a href="{% url 'nettikirppis:owner_items' %}">Omat tavarat</a>
-    {% endif %}
-</p>
+
 
 
 

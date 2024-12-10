@@ -3,15 +3,36 @@
 {% block page_header %}
     <div class="p-3 mb-4 bg-light border rounded-3">
         <div class="container-fluid py-4">
-            <h1 class="display-3">Osta ja myy käytettyjä tavaroita</h1>
+            <h1 class="display-3">Nettikirppis</h1>
 
             <p class="lead">Tue ilmastoa! Myy ja osta käytettyjä tavaroita.</p>
-            <!-- Vaihdetaan tuohon ylempään joku raflaavampi teksti joka "myy" tuotetta-->
-
+          
+        {% if not user.is_authenticated %}
             <a class="btn btn-primary btn-lg mt-1" href="{% url 'accounts:register' %}">Rekisteröidy &raquo;</a>
+        {% endif %}
         </div>
     </div>
+
+    {% if user.is_authenticated %}
+
+    <form action="{% url 'nettikirppis:new_item' %}" method="post">
+        {% csrf_token %}
+        
+        <button name="submit" class="bottom-button">
+            Uusi myynti-ilmoitus
+        </button>
+    </form>
+    <br>
+    <form action="{% url 'nettikirppis:owner_items' %}" method="post">
+        {% csrf_token %}
+        <button name="submit" class="bottom-button">
+            Omat ilmoitukset
+        </button>
+    </form>
+    {% endif %}
 {% endblock page_header %}
+
+
 {% block content %}
 
 {% endblock content %}

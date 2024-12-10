@@ -11,7 +11,7 @@
 <p>{{ item.price }}€</p>
 <div>
     {% if item.image %}
-        <img src="{{ item.image.url }}"></img>
+        <img src="{{ item.image.url }}" height=300px; width="300px"></img>
     {% else %}
         <p>Ei kuvaa tälle tuotteelle</p>
     {% endif %}
