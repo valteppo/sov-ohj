@@ -80,7 +80,7 @@ def edit_comment(request, comment_id):
 def owner_items(request):
     items = Item.objects.filter(owner=request.user).order_by('date_added')
     context = {'items':items}
-    return render(request, 'nettikirppis/owner_items.html', context)
+    return render(request, 'nettikirppis/items.html', context)
 
 @login_required
 def edit_item(request, item_id):
@@ -115,9 +115,10 @@ def delete_comment(request, comment_id):
 
     if request.method == "POST":
         comment.delete()
-        return JsonResponse({'success': True})
+        return redirect('nettikirppis:owner_items')
     
-    return JsonResponse({'success': True, 'error':'Invalid request method'})
+    context = {'comment':comment, 'item':item}
+    return render(request, 'nettikirppis/delete_comment.html', context)
 
 @login_required
 def new_reply(request, comment_id):

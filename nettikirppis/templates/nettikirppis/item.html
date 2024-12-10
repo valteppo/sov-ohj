@@ -37,11 +37,6 @@
         </p>
         {% endif %}
     
-        {% if user.id == comment.owner.id %}
-        <li id="comment-{{ comment.id }}">
-            <button onclick="confirmDelete( commentId )" class="delete-button">Poista</button>
-        </li>
-        {% endif %}
     </li>
         <ul>
         {% for reply in replies %}
