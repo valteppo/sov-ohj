@@ -9,7 +9,7 @@
 <form action="{% url 'nettikirppis:new_comment' item.id %}" method="post">
     {% csrf_token %}
     {{ form.as_div }}
-    <button name="submit">
+    <button name="submit" class="yes-button">
         Valmis
     </button>
 

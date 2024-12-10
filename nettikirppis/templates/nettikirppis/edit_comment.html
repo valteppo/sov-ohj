@@ -10,9 +10,15 @@
     <form action="{% url 'nettikirppis:edit_comment' comment.id %}" method="post">
         {% csrf_token %}
         {{ form.as_div }}
-        <button name="submit">
+        <button name="submit" class="bottom-button">
             Valmis
         </button>
     </form>
-    <a href="{% url 'nettikirppis:delete_comment' comment.id %}">Poista kommentti</a>
+
+    <form action="{% url 'nettikirppis:delete_comment' comment.id %}">
+        {% csrf_token %}
+        <button name="submit" class="bottom-button">
+            Poista kommentti
+        </button>
+    </form>
 {% endblock content %}
