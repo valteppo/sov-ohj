@@ -1,15 +1,14 @@
 {% extends 'nettikirppis/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+    <h2>Kirjaudu sisään</h2>
+{% endblock page_header %}
 
 {% block content %}
-{% if form.errors %}
-<p>Käyttäjänimi ja/tai tunnus eivät täsmää.</p>
-{% endif %}
-
-<form action="{% url 'accounts:login' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_div }}
-    <button name="submit">
-        Kirjaudu sisään
-    </button>
-</form>
+    <form action="{% url 'accounts:login' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="Kirjaudu sisään" %}
+    </form>
 {% endblock content %}

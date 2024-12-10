@@ -1,0 +1,17 @@
+{% extends 'nettikirppis/base.html' %}
+
+{% block content %}
+<p>
+    <a href="{% url 'nettikirppis:item' item.id %}">{{ item }}</a>
+</p>
+
+<p>Vastaa:</p>
+<form action="{% url 'nettikirppis:new_reply' comment.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button name="submit">
+        Valmis
+    </button>
+
+</form>
+{% endblock content %}

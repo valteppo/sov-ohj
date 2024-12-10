@@ -5,7 +5,7 @@
 <form enctype="multipart/form-data" action="{% url 'nettikirppis:new_item' %}" method="post">
     {% csrf_token %}
     {{ form.as_div }}
-    <button name="submit">Valmis</button>
+    <button name="submit" class="valmis-button">Valmis</button>
 
 </form>
 

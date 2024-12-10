@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'nettikirppis',
     'accounts',
 
+    # Third party apps
+    'django_bootstrap5',
+
     # Django default apps
     'django.contrib.admin',
     'django.contrib.auth',

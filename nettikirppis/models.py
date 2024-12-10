@@ -42,3 +42,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+class Reply(Comment):
+    """
+    Kommentteihin vastaaminen.
+    """
+
+    original_comment = models.ForeignKey(Comment, related_name='rel', on_delete=models.CASCADE)
+
+

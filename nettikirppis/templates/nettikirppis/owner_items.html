@@ -13,5 +13,12 @@
     <li>Ei myytäviä tavaroita.</li>
     {% endfor %}
 </ul>
-<a href="{% url 'nettikirppis:new_item' %}">Lisää uusi ilmoitus</a>
+{% if user.is_authenticated %}
+<form action="{% url 'nettikirppis:new_item' %}" method="post">
+    {% csrf_token %}
+    <button class="bottom-button">
+        Lisää uusi ilmoitus
+    </button>
+</form>
+{% endif %}
 {% endblock content %}
