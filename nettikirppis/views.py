@@ -64,7 +64,6 @@ def new_comment(request, item_id):
 def edit_comment(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
     item = comment.item
-    check_owner(item, request.user, request)
 
     if request.method != 'POST':
         form = CommentForm(instance=comment)

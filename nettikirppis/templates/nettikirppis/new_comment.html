@@ -6,7 +6,7 @@
 </p>
 
 <p>Kirjoita myyjälle:</p>
-<form action="{% url 'nettikirppis:new_comment' comment.id %}" method="post">
+<form action="{% url 'nettikirppis:new_comment' item.id %}" method="post">
     {% csrf_token %}
     {{ form.as_div }}
     <button name="submit">
